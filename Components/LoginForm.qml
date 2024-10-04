@@ -36,6 +36,7 @@ ColumnLayout {
         Layout.preferredHeight: root.height / 4
         Layout.maximumHeight: root.height / 4
         Layout.leftMargin: p != "0" ? a == "left" ? -p : a == "right" ? p : 0 : 0
+        Layout.topMargin: 100
         exposedSession: input.exposeSession
     }
 

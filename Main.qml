@@ -306,10 +306,5 @@ Pane {
             visible: config.FullBlur == "true" || config.PartialBlur == "true" ? true : false
         }
     }
-            Keys.onPressed: (event)=> {
-            if (event.key == Qt.Key_Space) {
-                config.PartialBlur = config.PartialBlur == "true" ? "false" : "true"
-            }
-        }
 }
 
