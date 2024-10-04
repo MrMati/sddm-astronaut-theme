@@ -16,10 +16,9 @@ RowLayout {
     property var suspend: ["Suspend", config.TranslateSuspend || textConstants.suspend, sddm.canSuspend]
     property var hibernate: ["Hibernate", config.TranslateHibernate || textConstants.hibernate, sddm.canHibernate]
 
-    property Control exposedSession
+    property ComboBox exposedSession
 
     Repeater {
-
         id: systemButtons
         model: [shutdown, reboot, suspend, hibernate]
 

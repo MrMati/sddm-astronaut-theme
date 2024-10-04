@@ -11,7 +11,7 @@ Column {
     id: inputContainer
     Layout.fillWidth: true
 
-    property Control exposeSession: sessionSelect.exposeSession
+    property ComboBox exposeSession: sessionSelect.exposeSession
     property bool failed
 
     Item {
@@ -61,7 +61,7 @@ Column {
         id: usernameField
 
         height: root.font.pointSize * 4.5
-        width: parent.width / 2
+        width: parent.width / 3
         anchors.horizontalCenter: parent.horizontalCenter
 
         ComboBox {
@@ -216,7 +216,7 @@ Column {
             }
             background: Rectangle {
                 color: "#222222"
-                opacity: 0.2
+                opacity: 0.4
                 border.color: "transparent"
                 border.width: parent.activeFocus ? 2 : 1
                 radius: config.RoundCorners || 0
@@ -246,7 +246,7 @@ Column {
         id: passwordField
 
         height: root.font.pointSize * 4.5
-        width: parent.width / 2
+        width: parent.width / 3
         anchors.horizontalCenter: parent.horizontalCenter
         
         Button {
@@ -338,13 +338,15 @@ Column {
             renderType: Text.QtRendering
             background: Rectangle {
                 color: "#222222"
-                opacity: 0.2
+                opacity: 0.4
                 border.color: "transparent"
                 border.width: parent.activeFocus ? 2 : 1
                 radius: config.RoundCorners || 0
             }
             onAccepted: config.AllowUppercaseLettersInUsernames == "false" ? sddm.login(username.text.toLowerCase(), password.text, sessionSelect.selectedSession) : sddm.login(username.text, password.text, sessionSelect.selectedSession)
             KeyNavigation.down: loginButton
+
+            onTextChanged: {text = (text == " " && config.IgnoreFirstSpaceInPassword == "true")? "" : text}
         }
 
         states: [
@@ -475,6 +477,12 @@ Column {
             Keys.onEnterPressed: clicked()
             KeyNavigation.down: sessionSelect.exposeSession
         }
+    }
+
+    SessionButton {
+        id: sessionSelect
+        loginButtonWidth: loginButton.background.width
+
     }
 
     Connections {

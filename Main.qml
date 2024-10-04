@@ -31,7 +31,7 @@ Pane {
     palette.mid: config.LoginButtonTextColor == "" ? config.TextColor : config.LoginButtonTextColor
     palette.alternateBase: config.BackgroundListColor == "" ? config.BackgroundColor: config.BackgroundListColor
     palette.toolTipBase: config.HoverSessionAndVirtualKeyboard == "" ? config.HighlightColor : config.HoverSessionAndVirtualKeyboard
-    
+
     font.family: config.Font
     font.pointSize: config.FontSize !== "" ? config.FontSize : parseInt(height / 80)
     focus: true
@@ -87,7 +87,7 @@ Pane {
             id: form
 
             height: parent.height
-            width: parent.width / 2.5
+            width: parent.width / 1.6
             anchors.horizontalCenter: config.FormPosition == "center" ? parent.horizontalCenter : undefined
             anchors.left: config.FormPosition == "left" ? parent.left : undefined
             anchors.right: config.FormPosition == "right" ? parent.right : undefined
@@ -291,6 +291,7 @@ Pane {
             visible: config.FullBlur == "true" || config.PartialBlur == "true" ? true : false
         }
 
+
         MultiEffect {
             id: blur
 
@@ -298,11 +299,17 @@ Pane {
             width: config.FullBlur == "true" ? parent.width : form.width
             source: config.FullBlur == "true" ? backgroundImage : blurMask
             blurEnabled: true
-            autoPaddingEnabled: false
+            autoPaddingEnabled: true
             blur: config.Blur == "" ? 2.0 : config.Blur
             blurMax: config.BlurMax == "" ? 48 : config.BlurMax
             anchors.centerIn: config.FullBlur == "true" ? parent : form
             visible: config.FullBlur == "true" || config.PartialBlur == "true" ? true : false
         }
     }
+            Keys.onPressed: (event)=> {
+            if (event.key == Qt.Key_Space) {
+                config.PartialBlur = config.PartialBlur == "true" ? "false" : "true"
+            }
+        }
 }
+
