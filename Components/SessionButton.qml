@@ -73,7 +73,7 @@ Item {
 
         contentItem: Text {
             id: displayedItem
-            text: (config.TranslateSessionSelection || "Session") + " (" + selectSession.currentText + ")"
+            text: selectSession.currentText
             color: root.palette.text
             verticalAlignment: Text.AlignVCenter
             font.pointSize: root.font.pointSize * 0.9
@@ -97,12 +97,14 @@ Item {
         popup: Popup {
             id: popupHandler
             y: parent.height + 20
-            x: -parent.x
+            //y: parent.height - 1
+
+            x: config.RightToLeftLayout == "true" ? -loginButtonWidth + displayedItem.width : 0
+            //x: -parent.x
+            //x:  -popupHandler.width/2 + displayedItem.width/2
+            
 
             width: sessionButton.width
-            y: parent.height - 1
-            x:  -popupHandler.width/2 + displayedItem.width/2
-            // x: config.RightToLeftLayout == "true" ? -loginButtonWidth + displayedItem.width : 0
             implicitHeight: contentItem.implicitHeight
             padding: 10
 
